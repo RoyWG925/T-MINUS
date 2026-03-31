@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DEADLINE PLANET — 世界最大倒數計時器</title>
+  <meta name="description" content="與全世界一起倒數每個重要時刻。即時追蹤你期待的每一天。">
+  <meta property="og:title" content="DEADLINE PLANET — 世界最大倒數計時器">
+  <meta property="og:description" content="距離下一個大事件還有多久？與全球用戶一起倒數每個值得期待的瞬間。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://roywg925.github.io/deadline-planet/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DEADLINE PLANET — 世界最大倒數計時器">
+  <meta name="twitter:description" content="距離下一個大事件還有多久？與全球用戶一起倒數每個值得期待的瞬間。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Orbitron:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -512,10 +520,46 @@
       border: 1px solid var(--glass-border);
       border-radius: 20px;
       padding: 28px;
-      cursor: default;
+      cursor: pointer;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       opacity: 0;
       transform: translateY(40px);
+    }
+
+    .event-card .card-click-hint {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 3px 10px;
+      border-radius: 100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .event-card:hover .card-click-hint {
+      opacity: 1;
+    }
+
+    /* Hero swap animation */
+    .hero-content.swap-out {
+      animation: hero-swap-out 0.35s ease-in forwards;
+    }
+    .hero-content.swap-in {
+      animation: hero-swap-in 0.5s ease-out forwards;
+    }
+
+    @keyframes hero-swap-out {
+      to { opacity: 0; transform: translateY(-30px) scale(0.97); }
+    }
+    @keyframes hero-swap-in {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .event-card.visible {
@@ -950,6 +994,78 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    /* ========== GLOBAL STATS BAR ========== */
+    .nav-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .global-counter {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+    }
+
+    .global-counter .counter-num {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: #ff9500;
+      font-size: 0.8rem;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00ff87;
+      animation: live-blink 2s ease-in-out infinite;
+    }
+
+    @keyframes live-blink {
+      0%, 100% { opacity: 1; box-shadow: 0 0 4px #00ff87; }
+      50% { opacity: 0.4; box-shadow: none; }
+    }
+
+    .btn-fire-hero {
+      background: rgba(255, 149, 0, 0.1);
+      color: #ff9500;
+      border: 1px solid rgba(255, 149, 0, 0.3);
+    }
+    .btn-fire-hero:hover {
+      background: rgba(255, 149, 0, 0.2);
+      border-color: rgba(255, 149, 0, 0.5);
+      transform: translateY(-1px);
+    }
+    .btn-fire-hero.voted {
+      background: rgba(255, 149, 0, 0.15);
+      border-color: rgba(255, 149, 0, 0.45);
+      color: #ffaa33;
+    }
+
+    .vote-burst {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.5rem;
+      z-index: 300;
+      animation: burst-up 0.8s ease-out forwards;
+    }
+
+    @keyframes burst-up {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-60px) scale(1.5); }
+    }
+
+    @media (max-width: 768px) {
+      .global-counter { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -963,7 +1079,13 @@
       DEADLINE PLANET
       <span>與世界一起倒數</span>
     </div>
-    <button class="btn-create" id="btnCreate">+ 建立倒數</button>
+    <div class="nav-stats">
+      <div class="global-counter">
+        <div class="live-dot"></div>
+        <span>🔥 <span class="counter-num" id="globalVoteCount">0</span> 全球投票</span>
+      </div>
+      <button class="btn-create" id="btnCreate">+ 建立倒數</button>
+    </div>
   </nav>
 
   <!-- Hero Section -->
@@ -1043,7 +1165,58 @@
     </div>
   </div>
 
+  <!-- Firebase SDK (全球即時同步 — 選用) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
   <script>
+    /* ========== FIREBASE CONFIG ========== */
+    // 到 https://console.firebase.google.com 建立 Realtime Database 專案
+    // 填入以下設定後即可啟用全球即時投票同步
+    // 未設定時使用 localStorage（每位使用者獨立資料）
+    const FIREBASE_CONFIG = {
+      apiKey: "",
+      authDomain: "",
+      databaseURL: "",
+      projectId: "",
+    };
+
+    let db = null;
+    let useFirebase = false;
+
+    if (FIREBASE_CONFIG.apiKey && typeof firebase !== 'undefined') {
+      try {
+        firebase.initializeApp(FIREBASE_CONFIG);
+        db = firebase.database();
+        useFirebase = true;
+        console.log('🔥 Firebase connected — real-time sync enabled');
+      } catch(e) {
+        console.warn('Firebase init failed, using localStorage');
+      }
+    }
+
+    /* ========== LOCAL STORAGE ========== */
+    function loadJSON(key, fallback) {
+      try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
+    }
+
+    let voteCounts = loadJSON('dp_votes', {});
+    let myVotes = loadJSON('dp_my_votes', {});
+
+    function saveVoteCounts(data) { localStorage.setItem('dp_votes', JSON.stringify(data)); }
+    function saveMyVotes(data) { localStorage.setItem('dp_my_votes', JSON.stringify(data)); }
+    function loadUserEvents() { return loadJSON('dp_user_events', []); }
+    function saveUserEvents(list) { localStorage.setItem('dp_user_events', JSON.stringify(list)); }
+
+    // 首次造訪：生成初始投票種子（小數字，真實感）
+    if (!localStorage.getItem('dp_seeded')) {
+      const seeds = {};
+      [1,2,3,4,5,6,7,8,9].forEach(id => { seeds[id] = Math.floor(Math.random() * 18) + 5; });
+      voteCounts = seeds;
+      saveVoteCounts(seeds);
+      localStorage.setItem('dp_seeded', '1');
+    }
+
     /* ========== EVENT DATA ========== */
     const CATEGORY_MAP = {
       sports: { label: '體育', color: '#00FF87', emoji: '⚡' },
@@ -1154,6 +1327,50 @@
       },
     ];
 
+    /* ========== VOTE HELPERS ========== */
+    function getVoteCount(id) { return voteCounts[id] || 0; }
+    function hasVoted(id) { return !!myVotes[id]; }
+
+    function getVoteBarWidth(id) {
+      const maxVotes = Math.max(1, ...events.map(e => getVoteCount(e.id)));
+      return Math.round((getVoteCount(id) / maxVotes) * 100);
+    }
+
+    function updateGlobalCounter() {
+      const total = Object.values(voteCounts).reduce((a, b) => a + b, 0);
+      const el = document.getElementById('globalVoteCount');
+      if (el) el.textContent = total.toLocaleString();
+    }
+
+    function updateAllVoteDisplays() {
+      const heroFireCount = document.querySelector('.hero-stat .fire-count');
+      if (heroFireCount) heroFireCount.textContent = getVoteCount(heroEvent.id);
+      const heroFireBtn = document.querySelector('.btn-fire-hero');
+      if (heroFireBtn && hasVoted(heroEvent.id)) {
+        heroFireBtn.classList.add('voted');
+        heroFireBtn.textContent = '🔥 已投票';
+      }
+      events.forEach(ev => {
+        const card = document.querySelector(`.event-card[data-id="${ev.id}"]`);
+        if (!card) return;
+        const fill = card.querySelector('.hype-bar-fill');
+        const val = card.querySelector('.hype-value');
+        const countEl = card.querySelector('.card-followers strong');
+        if (fill) fill.style.width = getVoteBarWidth(ev.id) + '%';
+        if (val) val.textContent = getVoteCount(ev.id) + ' 票';
+        if (countEl) countEl.textContent = getVoteCount(ev.id);
+      });
+      updateGlobalCounter();
+    }
+
+    // Firebase 即時監聽
+    if (useFirebase && db) {
+      db.ref('votes').on('value', (snapshot) => {
+        voteCounts = snapshot.val() || {};
+        updateAllVoteDisplays();
+      });
+    }
+
     /* ========== UTILITY ========== */
     function getCountdown(dateStr) {
       const diff = new Date(dateStr).getTime() - Date.now();
@@ -1245,15 +1462,14 @@
       document.querySelector('.hero-mouse-glow').style.background =
         `radial-gradient(circle, ${e.color}11, transparent 70%)`;
 
+      const votes = getVoteCount(e.id);
+      const voted = hasVoted(e.id);
       document.getElementById('heroActions').innerHTML = `
-        <div class="hero-stat">🔥 <span class="fire-count">${e.hype}% 期待</span></div>
-        <div class="hero-stat">👥 <span class="follow-count">${formatFollowers(e.followers)}</span> 追蹤</div>
+        <div class="hero-stat">🔥 <span class="fire-count">${votes}</span> 票</div>
+        <button class="btn-action btn-fire-hero ${voted ? 'voted' : ''}" onclick="voteHype(this, ${e.id})">${voted ? '🔥 已投票' : '🔥 投一票'}</button>
         <button class="btn-action btn-share" onclick="shareEvent(${e.id})">
           分享
           <span class="share-toast" id="toast-hero">已複製！</span>
-        </button>
-        <button class="btn-action btn-track" onclick="this.classList.toggle('active')">
-          ✦ 追蹤
         </button>
       `;
     }
@@ -1301,7 +1517,8 @@
       const expiredClass = cd.expired ? ' expired' : '';
 
       return `
-        <div class="event-card${expiredClass}" data-category="${event.category}" data-id="${event.id}" style="--card-color: ${event.color}">
+        <div class="event-card${expiredClass}" data-category="${event.category}" data-id="${event.id}" style="--card-color: ${event.color}" onclick="switchHero(${event.id})">
+          <span class="card-click-hint">點擊切換主畫面 ↑</span>
           <div class="card-header">
             <div class="card-emoji-wrap">
               <div class="card-emoji">${event.emoji}</div>
@@ -1316,17 +1533,17 @@
             ${buildCardCountdown(event)}
           </div>
           <div class="card-hype">
-            <span class="hype-label">🔥 期待度</span>
+            <span class="hype-label">🔥 投票</span>
             <div class="hype-bar-track">
-              <div class="hype-bar-fill" style="width: ${event.hype}%; background: linear-gradient(90deg, ${event.color}88, ${event.color})"></div>
+              <div class="hype-bar-fill" style="width: ${getVoteBarWidth(event.id)}%; background: linear-gradient(90deg, ${event.color}88, ${event.color})"></div>
             </div>
-            <span class="hype-value" style="color: ${event.color}">${event.hype}%</span>
+            <span class="hype-value" style="color: ${event.color}">${getVoteCount(event.id)} 票</span>
           </div>
           <div class="card-footer">
-            <div class="card-followers">👥 <strong>${formatFollowers(event.followers)}</strong> 人追蹤</div>
+            <div class="card-followers">🔥 <strong>${getVoteCount(event.id)}</strong> 人投票</div>
             <div class="card-actions">
-              <button class="card-btn card-btn-fire" onclick="voteHype(this, ${event.id})">🔥 +1</button>
-              <button class="card-btn" onclick="shareEvent(${event.id})">分享</button>
+              <button class="card-btn card-btn-fire ${hasVoted(event.id) ? 'voted' : ''}" onclick="event.stopPropagation(); voteHype(this, ${event.id})">${hasVoted(event.id) ? '🔥 已投' : '🔥 +1'}</button>
+              <button class="card-btn" onclick="event.stopPropagation(); shareEvent(${event.id})">分享</button>
             </div>
           </div>
         </div>
@@ -1374,15 +1591,41 @@
       });
     }
 
+    /* ========== SWITCH HERO ========== */
+    function switchHero(id) {
+      const event = events.find(e => e.id === id);
+      if (!event || event.id === heroEvent.id) return;
+
+      const heroContent = document.querySelector('.hero-content');
+      heroContent.classList.add('swap-out');
+
+      // Scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      setTimeout(() => {
+        heroEvent = event;
+        renderHero();
+        heroContent.classList.remove('swap-out');
+        heroContent.classList.add('swap-in');
+
+        // Re-render grid (exclude new hero)
+        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        renderGrid(activeFilter);
+
+        setTimeout(() => heroContent.classList.remove('swap-in'), 500);
+      }, 350);
+    }
+
     /* ========== INTERACTIONS ========== */
     function shareEvent(id) {
       const event = events.find(e => e.id === id);
       if (!event) return;
       const cd = getCountdown(event.date);
-      const text = `距離 ${event.name} 還有 ${cd.days} 天！${event.emoji}\n\n⏳ 來 DeadlinePlanet 一起倒數\n#DeadlinePlanet #${event.name.replace(/\s/g, '')}`;
+      const votes = getVoteCount(id);
+      const text = `距離 ${event.name} 還有 ${cd.days} 天！${event.emoji}\n🔥 ${votes} 人已投票\n\n⭐ 來 DeadlinePlanet 一起倒數\nhttps://roywg925.github.io/deadline-planet/\n#DeadlinePlanet`;
 
       if (navigator.share) {
-        navigator.share({ title: 'DeadlinePlanet', text }).catch(() => {});
+        navigator.share({ title: `距離 ${event.name} 還有 ${cd.days} 天`, text, url: 'https://roywg925.github.io/deadline-planet/' }).catch(() => {});
       } else if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => {
           showCopyToast();
@@ -1424,20 +1667,36 @@
     }
 
     function voteHype(btn, id) {
-      const event = events.find(e => e.id === id);
-      if (!event || btn.classList.contains('voted')) return;
-      event.hype = Math.min(99, event.hype + 1);
+      if (window.event) window.event.stopPropagation();
+      if (hasVoted(id) || btn.classList.contains('voted')) return;
+
+      // 儲存投票
+      myVotes[id] = true;
+      saveMyVotes(myVotes);
+      voteCounts[id] = (voteCounts[id] || 0) + 1;
+      saveVoteCounts(voteCounts);
+
+      // Firebase 同步
+      if (useFirebase && db) {
+        db.ref('votes/' + id).transaction(current => (current || 0) + 1);
+      }
+
+      // 視覺回饋
       btn.classList.add('voted');
       btn.textContent = '🔥 已投';
 
-      // Update the hype bar
-      const card = btn.closest('.event-card');
-      if (card) {
-        const fill = card.querySelector('.hype-bar-fill');
-        const val = card.querySelector('.hype-value');
-        if (fill) fill.style.width = event.hype + '%';
-        if (val) val.textContent = event.hype + '%';
-      }
+      // 🔥 爆裂動畫
+      const rect = btn.getBoundingClientRect();
+      const burst = document.createElement('div');
+      burst.className = 'vote-burst';
+      burst.textContent = '🔥';
+      burst.style.left = (rect.left + rect.width / 2) + 'px';
+      burst.style.top = rect.top + 'px';
+      document.body.appendChild(burst);
+      setTimeout(() => burst.remove(), 800);
+
+      // 更新所有顯示
+      updateAllVoteDisplays();
     }
 
     /* ========== FILTERS ========== */
@@ -1472,11 +1731,17 @@
         category,
         emoji: cat.emoji,
         color: cat.color,
-        hype: Math.floor(Math.random() * 30 + 50),
-        followers: Math.floor(Math.random() * 500 + 10),
+        hype: 0,
+        followers: 0,
       };
 
       events.push(newEvent);
+
+      // 儲存到 localStorage
+      const userEvts = loadUserEvents();
+      userEvts.push(newEvent);
+      saveUserEvents(userEvts);
+
       modal.classList.remove('open');
 
       // Reset form
@@ -1577,10 +1842,14 @@
     });
 
     /* ========== INIT ========== */
+    // 載入使用者自建事件
+    loadUserEvents().forEach(e => events.push(e));
+
     resizeCanvas();
     initStars();
     renderHero();
     renderGrid();
+    updateGlobalCounter();
     requestAnimationFrame(animate);
 
     // Tick every second
