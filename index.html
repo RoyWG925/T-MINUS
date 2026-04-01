@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEADLINE PLANET — 世界最大倒數計時器</title>
+  <title>T-MINUS — 與全世界一起倒數</title>
   <meta name="description" content="與全世界一起倒數每個重要時刻。即時追蹤你期待的每一天。">
-  <meta property="og:title" content="DEADLINE PLANET — 世界最大倒數計時器">
+  <meta property="og:title" content="T-MINUS — 與全世界一起倒數">
   <meta property="og:description" content="距離下一個大事件還有多久？與全球用戶一起倒數每個值得期待的瞬間。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://roywg925.github.io/deadline-planet/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="DEADLINE PLANET — 世界最大倒數計時器">
+  <meta name="twitter:title" content="T-MINUS — 與全世界一起倒數">
   <meta name="twitter:description" content="距離下一個大事件還有多久？與全球用戶一起倒數每個值得期待的瞬間。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1076,7 +1076,7 @@
   <!-- Navigation -->
   <nav class="nav">
     <div class="nav-brand">
-      DEADLINE PLANET
+      T-MINUS
       <span>與世界一起倒數</span>
     </div>
     <div class="nav-stats">
@@ -1128,8 +1128,8 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-brand">DEADLINE PLANET</div>
-    <p class="footer-copy">© 2026 DeadlinePlanet · 與全世界一起倒數每個值得期待的瞬間</p>
+    <div class="footer-brand">T-MINUS</div>
+    <p class="footer-copy">© 2026 T-Minus · 與全世界一起倒數每個值得期待的瞬間</p>
   </footer>
 
   <!-- Create Modal -->
@@ -1622,7 +1622,7 @@
       if (!event) return;
       const cd = getCountdown(event.date);
       const votes = getVoteCount(id);
-      const text = `距離 ${event.name} 還有 ${cd.days} 天！${event.emoji}\n🔥 ${votes} 人已投票\n\n⭐ 來 DeadlinePlanet 一起倒數\nhttps://roywg925.github.io/deadline-planet/\n#DeadlinePlanet`;
+      const text = `距離 ${event.name} 還有 ${cd.days} 天！${event.emoji}\n🔥 ${votes} 人已投票\n\n🚀 來 T-Minus 一起倒數\nhttps://roywg925.github.io/deadline-planet/\n#TMinus`;
 
       if (navigator.share) {
         navigator.share({ title: `距離 ${event.name} 還有 ${cd.days} 天`, text, url: 'https://roywg925.github.io/deadline-planet/' }).catch(() => {});
