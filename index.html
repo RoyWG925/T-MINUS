@@ -145,6 +145,27 @@
       transform: translateY(-1px);
     }
 
+    .btn-suggest {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 9px 16px;
+      border: 1px solid rgba(0, 200, 255, 0.35);
+      border-radius: 999px;
+      background: rgba(0, 170, 255, 0.08);
+      color: #9adfff;
+      cursor: pointer;
+      transition: all 0.28s;
+      letter-spacing: 0.03em;
+    }
+
+    .btn-suggest:hover {
+      background: rgba(0, 170, 255, 0.18);
+      border-color: rgba(0, 200, 255, 0.58);
+      box-shadow: 0 0 20px rgba(0, 170, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
     /* ========== HERO SECTION ========== */
     .hero {
       position: relative;
@@ -449,15 +470,24 @@
 
     /* ========== FILTERS ========== */
     .filters-section {
-      position: relative;
-      z-index: 1;
-      padding: 0 clamp(20px, 4vw, 48px);
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 50;
+      padding: 16px clamp(20px, 4vw, 48px);
       margin-bottom: 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
+      background: transparent;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+
+    .filters-section.stuck {
+      background: rgba(3, 3, 8, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
     }
 
     .filters {
@@ -928,22 +958,69 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      padding: 40px 24px 50px;
+      padding: 60px 24px 40px;
       border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .footer-inner {
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .footer-brand {
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       letter-spacing: 0.2em;
       color: var(--text-muted);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .footer-tagline {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.18);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .footer-shortcuts {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .footer-shortcut {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.13);
+    }
+
+    .footer-shortcut kbd {
+      display: inline-block;
+      padding: 1px 5px;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin: 0 auto 16px;
     }
 
     .footer-copy {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.15);
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.1);
     }
 
     /* ========== CARD EXPIRED ========== */
@@ -1002,6 +1079,34 @@
       gap: 16px;
     }
 
+    .lang-select {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: rgba(10,14,26,0.92);
+      border: 1px solid rgba(141, 228, 255, 0.28);
+      border-radius: 999px;
+      padding: 6px 28px 6px 12px;
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b8eeff' stroke-width='1.3' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      box-shadow: 0 0 0 1px rgba(141, 228, 255, 0.08) inset;
+    }
+
+    .lang-select:hover { border-color: rgba(141, 228, 255, 0.45); }
+    .lang-select:focus-visible {
+      outline: none;
+      border-color: rgba(141, 228, 255, 0.6);
+      box-shadow: 0 0 0 2px rgba(141, 228, 255, 0.18);
+    }
+    .lang-select option {
+      background: #0b1220;
+      color: #eaf6ff;
+    }
+
     .global-counter {
       display: flex;
       align-items: center;
@@ -1034,6 +1139,46 @@
       50% { opacity: 0.4; box-shadow: none; }
     }
 
+    .live-dot.offline {
+      background: #ff4444;
+      animation: none;
+      box-shadow: 0 0 4px #ff4444;
+    }
+
+    .offline-banner {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 68, 68, 0.12);
+      border-bottom: 1px solid rgba(255, 68, 68, 0.2);
+      color: rgba(255, 68, 68, 0.9);
+      font-size: 0.75rem;
+      text-align: center;
+      position: fixed;
+      top: 56px;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .offline-banner.visible { display: flex; }
+    .offline-banner .offline-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #ff4444; flex-shrink: 0;
+    }
+
+    .conn-tag {
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: 100px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .conn-tag.online { background: rgba(0, 255, 135, 0.12); color: #00ff87; }
+    .conn-tag.offline { background: rgba(255, 68, 68, 0.12); color: #ff6666; }
+
     .btn-fire-hero {
       background: rgba(255, 149, 0, 0.1);
       color: #ff9500;
@@ -1065,6 +1210,282 @@
 
     @media (max-width: 768px) {
       .global-counter { display: none; }
+      .scroll-indicator { bottom: 18px; }
+      .footer-shortcuts { gap: 12px; }
+    }
+
+    /* ========== SCROLL INDICATOR ========== */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: hero-enter 1s ease-out 1.2s both;
+      z-index: 2;
+      cursor: pointer;
+      transition: opacity 0.5s;
+    }
+
+    .scroll-indicator.faded { opacity: 0; pointer-events: none; }
+
+    .scroll-indicator-label {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .scroll-chevrons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .scroll-chevron {
+      width: 12px;
+      height: 12px;
+      border-right: 1.5px solid rgba(255,255,255,0.18);
+      border-bottom: 1.5px solid rgba(255,255,255,0.18);
+      transform: rotate(45deg);
+    }
+
+    .scroll-chevron:nth-child(1) { animation: chevron-fade 2s ease-in-out infinite; }
+    .scroll-chevron:nth-child(2) { animation: chevron-fade 2s ease-in-out 0.2s infinite; }
+
+    @keyframes chevron-fade {
+      0%, 100% { opacity: 0.15; transform: rotate(45deg) translate(0, 0); }
+      50% { opacity: 0.6; transform: rotate(45deg) translate(2px, 2px); }
+    }
+
+    /* ========== SECTION DIVIDER ========== */
+    .section-divider {
+      position: relative;
+      z-index: 1;
+      height: 1px;
+      margin: 0 clamp(40px, 8vw, 120px) 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(176, 124, 255, 0.12) 30%, rgba(0, 153, 255, 0.08) 70%, transparent 100%);
+    }
+
+    /* ========== EMPTY STATE ========== */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 24px;
+      animation: hero-enter 0.6s ease-out both;
+    }
+
+    .empty-state-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.4; }
+    .empty-state-text { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 4px; }
+    .empty-state-sub { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* ========== TIME PROGRESS ========== */
+    .card-time-progress { margin-bottom: 14px; }
+
+    .time-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .time-progress-label {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .time-progress-pct {
+      font-size: 0.6rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    .time-progress-track {
+      height: 2px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .time-progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1s ease-out;
+    }
+
+    /* ========== URGENCY BADGE ========== */
+    .card-urgency-badge {
+      position: absolute;
+      top: -1px;
+      left: 24px;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px 3px;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .badge-soon {
+      background: rgba(255, 170, 0, 0.12);
+      color: #ffaa00;
+      border: 1px solid rgba(255, 170, 0, 0.15);
+      border-top: none;
+    }
+
+    .badge-imminent {
+      background: rgba(255, 80, 80, 0.12);
+      color: #ff6b6b;
+      border: 1px solid rgba(255, 80, 80, 0.18);
+      border-top: none;
+    }
+
+    /* ========== FOCUS / A11Y ========== */
+    *:focus-visible {
+      outline: 2px solid rgba(176, 124, 255, 0.45);
+      outline-offset: 2px;
+    }
+
+    button:focus-visible {
+      box-shadow: 0 0 0 3px rgba(176, 124, 255, 0.1);
+    }
+
+    /* ========== FORM VALIDATION ========== */
+    .form-input.has-error {
+      border-color: rgba(255, 80, 80, 0.5);
+      box-shadow: 0 0 0 3px rgba(255, 80, 80, 0.08);
+    }
+
+    .form-error-msg {
+      font-size: 0.7rem;
+      color: #ff6b6b;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .form-error-msg.visible {
+      display: block;
+      animation: hero-enter 0.25s ease-out;
+    }
+
+    /* ========== GREETING ========== */
+    .hero-greeting {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      animation: hero-enter 1s ease-out 0.1s both;
+    }
+
+    /* ========== SUGGESTIONS ========== */
+    .suggestions-section {
+      position: relative;
+      z-index: 1;
+      padding: 0 clamp(20px, 4vw, 48px) 64px;
+    }
+
+    .suggestions-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .suggestions-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.78rem, 1.5vw, 0.95rem);
+      letter-spacing: 0.14em;
+      color: rgba(140, 225, 255, 0.9);
+    }
+
+    .suggestions-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .suggestions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .suggestion-card {
+      background: rgba(12, 20, 34, 0.55);
+      border: 1px solid rgba(140, 225, 255, 0.16);
+      border-radius: 14px;
+      padding: 14px;
+      backdrop-filter: blur(12px);
+    }
+
+    .suggestion-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #dff7ff;
+    }
+
+    .suggestion-meta {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .suggestion-note {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+      min-height: 36px;
+      margin-bottom: 10px;
+    }
+
+    .suggestion-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .suggestion-support {
+      font-size: 0.72rem;
+      color: #8de4ff;
+    }
+
+    .btn-support {
+      border: 1px solid rgba(140, 225, 255, 0.28);
+      background: rgba(140, 225, 255, 0.08);
+      color: #b8eeff;
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-support.voted {
+      background: rgba(140, 225, 255, 0.16);
+      color: #e5f8ff;
+    }
+
+    .suggestion-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 22px;
+      border: 1px dashed rgba(140, 225, 255, 0.16);
+      border-radius: 12px;
+      background: rgba(140, 225, 255, 0.02);
+    }
+
+    @media (max-width: 768px) {
+      .btn-suggest { padding: 8px 12px; font-size: 0.72rem; }
+      .suggestions-section { padding: 0 16px 48px; }
     }
   </style>
 </head>
@@ -1077,16 +1498,30 @@
   <nav class="nav">
     <div class="nav-brand">
       T-MINUS
-      <span>與世界一起倒數</span>
+      <span id="navBrandSub">與世界一起倒數</span>
     </div>
     <div class="nav-stats">
+      <select class="lang-select" id="langSelect" aria-label="Language">
+        <option value="zh-TW">繁中</option>
+        <option value="en">EN</option>
+        <option value="ja">日本語</option>
+        <option value="es">ES</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+      </select>
       <div class="global-counter">
-        <div class="live-dot"></div>
-        <span>🔥 <span class="counter-num" id="globalVoteCount">0</span> 全球投票</span>
+        <div class="live-dot" id="liveDot"></div>
+        <span>🔥 <span class="counter-num" id="globalVoteCount">0</span> <span id="globalVoteLabel">全球投票</span></span>
+        <span class="conn-tag" id="connTag"></span>
       </div>
-      <button class="btn-create" id="btnCreate">+ 建立倒數</button>
     </div>
   </nav>
+
+  <!-- Offline Banner -->
+  <div class="offline-banner" id="offlineBanner">
+    <div class="offline-dot"></div>
+    <span id="offlineBannerText"></span>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero" id="hero">
@@ -1097,6 +1532,7 @@
       <div class="orbit-ring"><div class="orbit-dot"></div></div>
     </div>
     <div class="hero-content">
+      <div class="hero-greeting" id="heroGreeting"></div>
       <div class="hero-emoji-wrap">
         <div class="hero-emoji" id="heroEmoji"></div>
         <div class="hero-emoji-glow" id="heroGlow"></div>
@@ -1107,17 +1543,27 @@
       <div class="hero-countdown" id="heroCountdown"></div>
       <div class="hero-actions" id="heroActions"></div>
     </div>
+    <div class="scroll-indicator" id="scrollIndicator" onclick="document.querySelector('.section-divider').scrollIntoView({behavior:'smooth'})">
+      <span class="scroll-indicator-label">探索更多</span>
+      <div class="scroll-chevrons">
+        <div class="scroll-chevron"></div>
+        <div class="scroll-chevron"></div>
+      </div>
+    </div>
   </section>
+
+  <!-- Section divider -->
+  <div class="section-divider"></div>
 
   <!-- Filters -->
   <div class="filters-section">
-    <span class="section-title">EXPLORE EVENTS</span>
+    <span class="section-title" id="exploreTitle">EXPLORE EVENTS</span>
     <div class="filters">
-      <button class="filter-btn active" data-filter="all">全部</button>
-      <button class="filter-btn" data-filter="sports">⚡ 體育</button>
-      <button class="filter-btn" data-filter="tech">💡 科技</button>
-      <button class="filter-btn" data-filter="entertainment">🎬 娛樂</button>
-      <button class="filter-btn" data-filter="holiday">🎊 節日</button>
+      <button class="filter-btn active" data-filter="all" id="filterAll">全部</button>
+      <button class="filter-btn" data-filter="sports" id="filterSports">⚡ 體育</button>
+      <button class="filter-btn" data-filter="tech" id="filterTech">💡 科技</button>
+      <button class="filter-btn" data-filter="entertainment" id="filterEnt">🎬 娛樂</button>
+      <button class="filter-btn" data-filter="holiday" id="filterHoliday">🎊 節日</button>
     </div>
   </div>
 
@@ -1128,104 +1574,272 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-brand">T-MINUS</div>
-    <p class="footer-copy">© 2026 T-Minus · 與全世界一起倒數每個值得期待的瞬間</p>
+    <div class="footer-inner">
+      <div class="footer-brand">T-MINUS</div>
+      <p class="footer-tagline" id="footerTagline">每一秒都在靠近那些值得期待的瞬間</p>
+      <div class="footer-shortcuts">
+        <span class="footer-shortcut"><kbd>Esc</kbd> <span id="shortcutClose">關閉視窗</span></span>
+        <span class="footer-shortcut"><kbd>↑</kbd> <span id="shortcutTop">回到頂部</span></span>
+      </div>
+      <div class="footer-divider"></div>
+      <p class="footer-copy" id="footerCopy">© 2026 T-Minus · Built with ♥ for every moment worth counting down to</p>
+    </div>
   </footer>
 
-  <!-- Create Modal -->
-  <div class="modal-overlay" id="createModal">
-    <div class="modal">
-      <h2>建立新的倒數</h2>
-      <p class="modal-desc">新增一個全世界都能追蹤的倒數計時</p>
-      <div class="form-group">
-        <label class="form-label">事件名稱</label>
-        <input type="text" class="form-input" id="inputName" placeholder="例：我的畢業典禮" maxlength="40">
-      </div>
-      <div class="form-group">
-        <label class="form-label">目標日期</label>
-        <input type="datetime-local" class="form-input" id="inputDate">
-      </div>
-      <div class="form-group">
-        <label class="form-label">分類</label>
-        <select class="form-select" id="inputCategory">
-          <option value="sports">⚡ 體育</option>
-          <option value="tech">💡 科技</option>
-          <option value="entertainment">🎬 娛樂</option>
-          <option value="holiday">🎊 節日</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">簡短說明（選填）</label>
-        <input type="text" class="form-input" id="inputSubtitle" placeholder="例：四年苦讀終於結束！" maxlength="50">
-      </div>
-      <div class="modal-btns">
-        <button class="btn-modal-cancel" id="btnCancel">取消</button>
-        <button class="btn-modal-submit" id="btnSubmit">建立倒數 🚀</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Firebase SDK (全球即時同步 — 選用) -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-
   <script>
-    /* ========== FIREBASE CONFIG ========== */
-    // 到 https://console.firebase.google.com 建立 Realtime Database 專案
-    // 填入以下設定後即可啟用全球即時投票同步
-    // 未設定時使用 localStorage（每位使用者獨立資料）
-    const FIREBASE_CONFIG = {
-      apiKey: "",
-      authDomain: "",
-      databaseURL: "",
-      projectId: "",
+    /* ========== LOCAL STORAGE ========== */
+    const ls = {
+      get: (key) => { try { return localStorage.getItem(key); } catch { return null; } },
+      set: (key, val) => { try { localStorage.setItem(key, val); } catch {} }
     };
 
-    let db = null;
-    let useFirebase = false;
-
-    if (FIREBASE_CONFIG.apiKey && typeof firebase !== 'undefined') {
-      try {
-        firebase.initializeApp(FIREBASE_CONFIG);
-        db = firebase.database();
-        useFirebase = true;
-        console.log('🔥 Firebase connected — real-time sync enabled');
-      } catch(e) {
-        console.warn('Firebase init failed, using localStorage');
-      }
-    }
-
-    /* ========== LOCAL STORAGE ========== */
     function loadJSON(key, fallback) {
-      try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
+      try { const v = ls.get(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; }
     }
 
     let voteCounts = loadJSON('dp_votes', {});
     let myVotes = loadJSON('dp_my_votes', {});
+    let mySuggestionVotes = loadJSON('dp_my_suggestion_votes', {});
+    let suggestionCache = [];
 
-    function saveVoteCounts(data) { localStorage.setItem('dp_votes', JSON.stringify(data)); }
-    function saveMyVotes(data) { localStorage.setItem('dp_my_votes', JSON.stringify(data)); }
+    function saveVoteCounts(data) { ls.set('dp_votes', JSON.stringify(data)); }
+    function saveMyVotes(data) { ls.set('dp_my_votes', JSON.stringify(data)); }
+    function saveMySuggestionVotes(data) { ls.set('dp_my_suggestion_votes', JSON.stringify(data)); }
     function loadUserEvents() { return loadJSON('dp_user_events', []); }
-    function saveUserEvents(list) { localStorage.setItem('dp_user_events', JSON.stringify(list)); }
+    function saveUserEvents(list) { ls.set('dp_user_events', JSON.stringify(list)); }
 
-    // 首次造訪：生成初始投票種子（小數字，真實感）
-    if (!localStorage.getItem('dp_seeded')) {
-      const seeds = {};
-      [1,2,3,4,5,6,7,8,9].forEach(id => { seeds[id] = Math.floor(Math.random() * 18) + 5; });
-      voteCounts = seeds;
-      saveVoteCounts(seeds);
-      localStorage.setItem('dp_seeded', '1');
+    const I18N = {
+      'zh-TW': {
+        navSub: '與世界一起倒數',
+        globalVotes: '全球投票',
+        create: '+ 建立倒數',
+        explore: 'EXPLORE EVENTS',
+        filters: { all: '全部', sports: '⚡ 體育', tech: '💡 科技', entertainment: '🎬 娛樂', holiday: '🎊 節日' },
+        footerTagline: '每一秒都在靠近那些值得期待的瞬間',
+        shortcutCreate: '建立倒數',
+        shortcutClose: '關閉視窗',
+        shortcutTop: '回到頂部',
+        footerCopy: '© 2026 T-Minus · 讓每個值得等待的時刻都被好好記住',
+        modalTitle: '建立新的倒數',
+        modalDesc: '新增一個全世界都能追蹤的倒數計時',
+        labelName: '事件名稱',
+        labelDate: '目標日期',
+        labelCategory: '分類',
+        labelSubtitle: '簡短說明（選填）',
+        placeholderName: '例：我的畢業典禮',
+        placeholderSubtitle: '例：四年苦讀終於結束！',
+        errorName: '請輸入事件名稱',
+        errorDate: '請選擇一個未來的日期',
+        cancel: '取消',
+        createSubmit: '建立倒數 🚀',
+        unit: { day: '天', hour: '時', min: '分', sec: '秒' },
+        category: { sports: '體育', tech: '科技', entertainment: '娛樂', holiday: '節日' },
+        cardSwitchHint: '點擊切換主畫面 ↑',
+        cardProgress: '倒數進度',
+        cardVotes: '🔥 投票',
+        votedPeople: '🔥 <strong>{count}</strong> 人投票',
+        voteBtn: '🔥 +1',
+        votedBtn: '🔥 已投',
+        heroVotes: '票',
+        heroVoteBtn: '🔥 投一票',
+        heroVotedBtn: '🔥 已投票',
+        share: '分享',
+        copied: '✅ 已複製到剪貼簿',
+        copiedMini: '已複製！',
+        createdOk: '✅ 已建立新的倒數',
+        duplicateEvent: '這個倒數已存在，請調整名稱或時間',
+        suggestOpen: '💡 推薦倒數',
+        suggestionsTitle: 'COMMUNITY RECOMMENDATION POOL',
+        suggestionsSub: '大家先推薦、附議投票，再由你手動挑選建立正式倒數',
+        suggestModalTitle: '推薦一個倒數事件',
+        suggestModalDesc: '你提供想法，我手動審核後建立成正式倒數',
+        suggestName: '想推薦的事件名稱',
+        suggestDate: '預計時間（可選）',
+        suggestCategory: '分類',
+        suggestReason: '推薦理由',
+        suggestPlaceholderName: '例：2027 台北馬拉松',
+        suggestPlaceholderReason: '你為什麼希望看到這個倒數？',
+        suggestErrorName: '請輸入推薦事件名稱',
+        suggestErrorReason: '請填寫推薦理由',
+        suggestSubmit: '送出推薦',
+        suggestDbOff: '⚠️ 資料庫尚未啟用，暫時無法送出推薦',
+        suggestSent: '✅ 已送出推薦，感謝你的提案',
+        suggestSupport: '附議',
+        suggestSupported: '已附議',
+        suggestVotes: '{count} 人附議',
+        suggestPendingTag: '待審核',
+        suggestNoData: '還沒有推薦事件，成為第一個提案的人吧',
+        offlineBanner: '⚠️ 尚未連接資料庫 — 投票與推薦僅儲存在你的瀏覽器中',
+        offlineVote: '目前為離線模式，投票不會同步到其他人',
+        onlineTag: '即時同步',
+        offlineTag: '離線模式',
+        emptyTitle: '這個分類目前沒有倒數事件',
+        emptySub: '試試其他分類，或建立一個新的倒數',
+        urgentSoon: '即將到來',
+        urgentNow: '倒數衝刺',
+        scrollExplore: '探索更多',
+        titleFormat: '{d}天{h}時{m}分 — {event} | T-MINUS',
+        shareText: '距離 {event} 還有 {days} 天！{emoji}\n🔥 {votes} 人已投票\n\n🚀 來 T-Minus 一起倒數\nhttps://roywg925.github.io/deadline-planet/\n#TMinus',
+        shareTitle: '距離 {event} 還有 {days} 天',
+        greetings: {
+          morning: ['晨光已上線，今天值得期待。', '早安，目標正在向你靠近。', '把今天過好，倒數會給你答案。'],
+          noon: ['午安，進度正在默默前進。', '今天的你，比昨天更接近那一天。', '別急，精彩正在倒數路上。'],
+          evening: ['晚風很好，夢想也還在前進。', '晚上好，把今天收進倒數裡。', '夜色降臨，但期待感正在升溫。'],
+          night: ['夜深了，仍有值得奔赴的那一天。', '安靜的夜晚，最適合和未來對話。', '就算很晚，也別忘了你在前進。']
+        }
+      },
+      en: {
+        navSub: 'Count down with the world', globalVotes: 'global votes', create: '+ Create Countdown', explore: 'EXPLORE EVENTS',
+        filters: { all: 'All', sports: '⚡ Sports', tech: '💡 Tech', entertainment: '🎬 Entertainment', holiday: '🎊 Holidays' },
+        footerTagline: 'Every second brings us closer to what matters.', shortcutCreate: 'Create countdown', shortcutClose: 'Close modal', shortcutTop: 'Back to top',
+        footerCopy: '© 2026 T-Minus · Crafted with care for moments worth waiting for', modalTitle: 'Create a new countdown', modalDesc: 'Add a countdown everyone can follow',
+        labelName: 'Event name', labelDate: 'Target date', labelCategory: 'Category', labelSubtitle: 'Short description (optional)', placeholderName: 'e.g. My graduation day', placeholderSubtitle: 'e.g. Four years finally paid off!',
+        errorName: 'Please enter an event name', errorDate: 'Please select a future date', cancel: 'Cancel', createSubmit: 'Create Countdown 🚀',
+        unit: { day: 'D', hour: 'H', min: 'M', sec: 'S' }, category: { sports: 'Sports', tech: 'Tech', entertainment: 'Entertainment', holiday: 'Holiday' },
+        cardSwitchHint: 'Click to pin in hero ↑', cardProgress: 'Progress', cardVotes: '🔥 Votes', votedPeople: '🔥 <strong>{count}</strong> votes', voteBtn: '🔥 +1', votedBtn: '🔥 Voted',
+        heroVotes: 'votes', heroVoteBtn: '🔥 Vote', heroVotedBtn: '🔥 Voted', share: 'Share', copied: '✅ Copied to clipboard', copiedMini: 'Copied!',
+        createdOk: '✅ Countdown created', duplicateEvent: 'This countdown already exists. Try a different name or date.',
+        suggestOpen: '💡 Recommend', suggestionsTitle: 'COMMUNITY RECOMMENDATION POOL', suggestionsSub: 'Users propose, everyone supports, and you manually approve into official countdowns.',
+        suggestModalTitle: 'Recommend a countdown', suggestModalDesc: 'Send your idea, and it will be manually reviewed before publishing.', suggestName: 'Suggested event name', suggestDate: 'Approximate date (optional)', suggestCategory: 'Category', suggestReason: 'Why this should be added',
+        suggestPlaceholderName: 'e.g. Taipei Marathon 2027', suggestPlaceholderReason: 'Why should this event be added?', suggestErrorName: 'Please enter an event name', suggestErrorReason: 'Please tell us why', suggestSubmit: 'Send recommendation',
+        suggestDbOff: '⚠️ Database is not enabled yet, recommendation cannot be submitted.', suggestSent: '✅ Recommendation sent. Thank you!', suggestSupport: 'Support', suggestSupported: 'Supported', suggestVotes: '{count} supports', suggestPendingTag: 'Pending review', suggestNoData: 'No recommendations yet. Be the first to submit one.',
+        emptyTitle: 'No countdowns in this category yet', emptySub: 'Try another category or create one now', urgentSoon: 'COMING SOON', urgentNow: 'HAPPENING SOON',
+        scrollExplore: 'Explore more', titleFormat: '{d}d {h}h {m}m — {event} | T-MINUS',
+        shareText: '{days} days left until {event}! {emoji}\n🔥 {votes} votes already\n\n🚀 Join the countdown on T-Minus\nhttps://roywg925.github.io/deadline-planet/\n#TMinus',
+        shareTitle: '{days} days left until {event}',
+        greetings: { morning: ['Morning. Your milestone is getting closer.', 'Good morning. Momentum starts now.', 'A fresh day, one step closer.'], noon: ['Midday check: progress is alive.', 'You are closer than this morning.', 'Keep going, the countdown is moving.'], evening: ['Evening mode, still moving forward.', 'Good evening. Let today count.', 'The day fades, your goal does not.'], night: ['Quiet night, loud ambition.', 'Late hours, steady progress.', 'Even at night, your future is on schedule.'] }
+      },
+      ja: {
+        navSub: '世界と一緒にカウントダウン', globalVotes: '世界の投票', create: '+ カウントダウン作成', explore: 'EXPLORE EVENTS',
+        filters: { all: 'すべて', sports: '⚡ スポーツ', tech: '💡 テック', entertainment: '🎬 エンタメ', holiday: '🎊 祝日' },
+        footerTagline: '大切な瞬間へ、毎秒近づいていく。', shortcutCreate: '作成', shortcutClose: '閉じる', shortcutTop: 'トップへ', footerCopy: '© 2026 T-Minus · 待つ価値のある瞬間のために',
+        modalTitle: '新しいカウントダウン', modalDesc: 'みんなで追えるカウントダウンを追加', labelName: 'イベント名', labelDate: '目標日時', labelCategory: 'カテゴリ', labelSubtitle: '短い説明（任意）', placeholderName: '例：卒業式', placeholderSubtitle: '例：4年間の努力がついに！',
+        errorName: 'イベント名を入力してください', errorDate: '未来の日時を選択してください', cancel: 'キャンセル', createSubmit: '作成 🚀',
+        unit: { day: '日', hour: '時', min: '分', sec: '秒' }, category: { sports: 'スポーツ', tech: 'テック', entertainment: 'エンタメ', holiday: '祝日' },
+        cardSwitchHint: 'クリックでメインに表示 ↑', cardProgress: '進捗', cardVotes: '🔥 投票', votedPeople: '🔥 <strong>{count}</strong> 票', voteBtn: '🔥 +1', votedBtn: '🔥 投票済み',
+        heroVotes: '票', heroVoteBtn: '🔥 投票', heroVotedBtn: '🔥 投票済み', share: '共有', copied: '✅ クリップボードにコピーしました', copiedMini: 'コピー済み！',
+        createdOk: '✅ カウントダウンを作成しました', duplicateEvent: '同じカウントダウンが既にあります。',
+        offlineBanner: '⚠️ データベース未接続 — 投票と推薦はブラウザにのみ保存されます', offlineVote: 'オフラインモード：投票は他のユーザーに同期されません', onlineTag: 'リアルタイム同期', offlineTag: 'オフライン',
+        emptyTitle: 'このカテゴリにはまだイベントがありません', emptySub: '別カテゴリを試すか、新しく作成してください', urgentSoon: 'まもなく', urgentNow: '直前',
+        scrollExplore: 'もっと見る', titleFormat: '{event}まで {d}日 {h}時間 {m}分 | T-MINUS',
+        shareText: '{event}まであと{days}日！{emoji}\n🔥 すでに{votes}票\n\n🚀 T-Minusで一緒にカウントダウン\nhttps://roywg925.github.io/deadline-planet/\n#TMinus',
+        shareTitle: '{event}まであと{days}日',
+        greetings: { morning: ['おはよう。今日も一歩前進。', '新しい朝、目標に近づく時間。', '朝の一歩が未来を変える。'], noon: ['午後も進捗は止まらない。', 'ここからの積み上げが効く。', '今この時間も前進中。'], evening: ['こんばんは。今日を積み重ねよう。', '夜に向けても、目標は近づく。', '一日を終えてもカウントは続く。'], night: ['静かな夜、強い意志。', '夜更けでも進歩はある。', '遅い時間ほど、想いは深くなる。'] }
+      },
+      es: {
+        navSub: 'Cuenta regresiva con el mundo', globalVotes: 'votos globales', create: '+ Crear cuenta regresiva', explore: 'EXPLORAR EVENTOS',
+        filters: { all: 'Todo', sports: '⚡ Deportes', tech: '💡 Tecnología', entertainment: '🎬 Entretenimiento', holiday: '🎊 Festivos' },
+        footerTagline: 'Cada segundo nos acerca a lo importante.', shortcutCreate: 'Crear', shortcutClose: 'Cerrar', shortcutTop: 'Ir arriba', footerCopy: '© 2026 T-Minus · Hecho con cuidado para momentos que valen la espera',
+        modalTitle: 'Crear nueva cuenta regresiva', modalDesc: 'Añade una cuenta regresiva que todos puedan seguir', labelName: 'Nombre del evento', labelDate: 'Fecha objetivo', labelCategory: 'Categoría', labelSubtitle: 'Descripción corta (opcional)', placeholderName: 'p. ej. Mi graduación', placeholderSubtitle: 'p. ej. ¡Cuatro años por fin!',
+        errorName: 'Ingresa un nombre del evento', errorDate: 'Selecciona una fecha futura', cancel: 'Cancelar', createSubmit: 'Crear 🚀',
+        unit: { day: 'D', hour: 'H', min: 'M', sec: 'S' }, category: { sports: 'Deportes', tech: 'Tecnología', entertainment: 'Entretenimiento', holiday: 'Festivo' },
+        cardSwitchHint: 'Haz clic para fijar arriba ↑', cardProgress: 'Progreso', cardVotes: '🔥 Votos', votedPeople: '🔥 <strong>{count}</strong> votos', voteBtn: '🔥 +1', votedBtn: '🔥 Votado',
+        heroVotes: 'votos', heroVoteBtn: '🔥 Votar', heroVotedBtn: '🔥 Votado', share: 'Compartir', copied: '✅ Copiado al portapapeles', copiedMini: '¡Copiado!',
+        createdOk: '✅ Cuenta regresiva creada', duplicateEvent: 'Esta cuenta regresiva ya existe.',
+        offlineBanner: '⚠️ Sin base de datos — los votos y recomendaciones solo se guardan localmente', offlineVote: 'Modo sin conexión: los votos no se sincronizan', onlineTag: 'Sincronización en vivo', offlineTag: 'Sin conexión',
+        emptyTitle: 'Aún no hay eventos en esta categoría', emptySub: 'Prueba otra categoría o crea uno ahora', urgentSoon: 'PRONTO', urgentNow: 'MUY PRONTO',
+        scrollExplore: 'Explorar más', titleFormat: '{d}d {h}h {m}m — {event} | T-MINUS',
+        shareText: '¡Faltan {days} días para {event}! {emoji}\n🔥 Ya hay {votes} votos\n\n🚀 Únete en T-Minus\nhttps://roywg925.github.io/deadline-planet/\n#TMinus',
+        shareTitle: 'Faltan {days} días para {event}',
+        greetings: { morning: ['Buenos días. Tu meta está más cerca.', 'Nueva mañana, nueva inercia.', 'Hoy también cuenta para llegar.'], noon: ['Seguimos avanzando este mediodía.', 'Más cerca que hace unas horas.', 'La cuenta regresiva no se detiene.'], evening: ['Buenas tardes. Cierra el día con progreso.', 'La tarde cae, tu meta se acerca.', 'Otro día bien invertido.'], night: ['Noche tranquila, objetivo firme.', 'Incluso de noche, sigues avanzando.', 'Tu futuro también se construye ahora.'] }
+      },
+      fr: {
+        navSub: 'Comptez avec le monde', globalVotes: 'votes mondiaux', create: '+ Creer un compte a rebours', explore: 'EXPLORER LES EVENEMENTS',
+        filters: { all: 'Tout', sports: '⚡ Sport', tech: '💡 Tech', entertainment: '🎬 Divertissement', holiday: '🎊 Fetes' },
+        footerTagline: 'Chaque seconde vous rapproche de l essentiel.', shortcutCreate: 'Creer', shortcutClose: 'Fermer', shortcutTop: 'Haut de page', footerCopy: '© 2026 T-Minus · Concu avec soin pour les moments qui comptent',
+        modalTitle: 'Creer un nouveau compte a rebours', modalDesc: 'Ajoutez un compte a rebours suivi par tous', labelName: 'Nom de l evenement', labelDate: 'Date cible', labelCategory: 'Categorie', labelSubtitle: 'Description courte (optionnel)', placeholderName: 'ex. Ma remise de diplome', placeholderSubtitle: 'ex. Enfin la fin de quatre ans !',
+        errorName: 'Veuillez saisir un nom d evenement', errorDate: 'Veuillez choisir une date future', cancel: 'Annuler', createSubmit: 'Creer 🚀',
+        unit: { day: 'J', hour: 'H', min: 'M', sec: 'S' }, category: { sports: 'Sport', tech: 'Tech', entertainment: 'Divertissement', holiday: 'Fete' },
+        cardSwitchHint: 'Cliquez pour afficher en hero ↑', cardProgress: 'Progression', cardVotes: '🔥 Votes', votedPeople: '🔥 <strong>{count}</strong> votes', voteBtn: '🔥 +1', votedBtn: '🔥 Vote',
+        heroVotes: 'votes', heroVoteBtn: '🔥 Voter', heroVotedBtn: '🔥 Vote', share: 'Partager', copied: '✅ Copie dans le presse-papiers', copiedMini: 'Copie !',
+        createdOk: '✅ Compte a rebours cree', duplicateEvent: 'Ce compte a rebours existe deja.',
+        offlineBanner: '⚠️ Aucune base de donnees connectee — les votes sont enregistres localement', offlineVote: 'Mode hors ligne : les votes ne sont pas synchronises', onlineTag: 'Synchro en direct', offlineTag: 'Hors ligne',
+        emptyTitle: 'Aucun evenement dans cette categorie', emptySub: 'Essayez une autre categorie ou creez-en un', urgentSoon: 'BIENTOT', urgentNow: 'IMMINENT',
+        scrollExplore: 'Voir plus', titleFormat: '{d}j {h}h {m}m — {event} | T-MINUS',
+        shareText: 'Plus que {days} jours avant {event} ! {emoji}\n🔥 {votes} votes deja\n\n🚀 Rejoignez T-Minus\nhttps://roywg925.github.io/deadline-planet/\n#TMinus',
+        shareTitle: '{days} jours avant {event}',
+        greetings: { morning: ['Bonjour. Votre objectif se rapproche.', 'Nouveau matin, nouvel elan.', 'Un pas de plus aujourd hui.'], noon: ['A midi, la progression continue.', 'Vous etes plus proche que ce matin.', 'La dynamique est la.'], evening: ['Bonsoir. Donnez du sens a cette journee.', 'Le soir tombe, votre cap avance.', 'Encore une journee utile.'], night: ['Nuit calme, ambition intacte.', 'Meme tard, vous avancez.', 'Le futur se construit aussi la nuit.'] }
+      },
+      de: {
+        navSub: 'Mit der Welt herunterzahlen', globalVotes: 'globale Stimmen', create: '+ Countdown erstellen', explore: 'EVENTS ENTDECKEN',
+        filters: { all: 'Alle', sports: '⚡ Sport', tech: '💡 Tech', entertainment: '🎬 Unterhaltung', holiday: '🎊 Feiertage' },
+        footerTagline: 'Jede Sekunde bringt dich naeher ans Ziel.', shortcutCreate: 'Erstellen', shortcutClose: 'Schliessen', shortcutTop: 'Nach oben', footerCopy: '© 2026 T-Minus · Mit Sorgfalt fuer Momente, auf die man wartet',
+        modalTitle: 'Neuen Countdown erstellen', modalDesc: 'Fuege einen Countdown hinzu, dem alle folgen koennen', labelName: 'Eventname', labelDate: 'Zieldatum', labelCategory: 'Kategorie', labelSubtitle: 'Kurze Beschreibung (optional)', placeholderName: 'z. B. Mein Abschluss', placeholderSubtitle: 'z. B. Vier Jahre Arbeit haben sich gelohnt!',
+        errorName: 'Bitte gib einen Eventnamen ein', errorDate: 'Bitte waehle ein zukuenftiges Datum', cancel: 'Abbrechen', createSubmit: 'Erstellen 🚀',
+        unit: { day: 'T', hour: 'H', min: 'M', sec: 'S' }, category: { sports: 'Sport', tech: 'Tech', entertainment: 'Unterhaltung', holiday: 'Feiertag' },
+        cardSwitchHint: 'Klicken fuer Hero Ansicht ↑', cardProgress: 'Fortschritt', cardVotes: '🔥 Stimmen', votedPeople: '🔥 <strong>{count}</strong> Stimmen', voteBtn: '🔥 +1', votedBtn: '🔥 Gewaehlt',
+        heroVotes: 'Stimmen', heroVoteBtn: '🔥 Abstimmen', heroVotedBtn: '🔥 Gewaehlt', share: 'Teilen', copied: '✅ In die Zwischenablage kopiert', copiedMini: 'Kopiert!',
+        createdOk: '✅ Countdown erstellt', duplicateEvent: 'Dieser Countdown existiert bereits.',
+        offlineBanner: '⚠️ Keine Datenbank verbunden — Stimmen werden nur lokal gespeichert', offlineVote: 'Offlinemodus: Stimmen werden nicht synchronisiert', onlineTag: 'Live-Sync', offlineTag: 'Offline',
+        emptyTitle: 'In dieser Kategorie gibt es noch keine Events', emptySub: 'Andere Kategorie waehlen oder jetzt erstellen', urgentSoon: 'BALD', urgentNow: 'SEHR BALD',
+        scrollExplore: 'Mehr entdecken', titleFormat: '{d}T {h}h {m}m — {event} | T-MINUS',
+        shareText: '{days} Tage bis {event}! {emoji}\n🔥 Bereits {votes} Stimmen\n\n🚀 Mach mit bei T-Minus\nhttps://roywg925.github.io/deadline-planet/\n#TMinus',
+        shareTitle: '{days} Tage bis {event}',
+        greetings: { morning: ['Guten Morgen. Dein Ziel rueckt naeher.', 'Neuer Tag, neuer Schwung.', 'Heute zaehlt auf dem Weg zum Ziel.'], noon: ['Mittags laeuft der Fortschritt weiter.', 'Du bist naeher als heute Morgen.', 'Der Countdown arbeitet fuer dich.'], evening: ['Guten Abend. Lass den Tag wirken.', 'Der Abend kommt, dein Ziel auch.', 'Ein weiterer Schritt ist geschafft.'], night: ['Ruhige Nacht, klare Richtung.', 'Auch spaet geht es voran.', 'Deine Zukunft entsteht gerade jetzt.'] }
+      }
+    };
+
+    const SUPPORTED_LANGS = ['zh-TW', 'en', 'ja', 'es', 'fr', 'de'];
+
+    function normalizeLang(lang) {
+      if (!lang) return 'zh-TW';
+      if (SUPPORTED_LANGS.includes(lang)) return lang;
+      const base = String(lang).toLowerCase().split('-')[0];
+      if (base === 'zh') return 'zh-TW';
+      return SUPPORTED_LANGS.includes(base) ? base : 'zh-TW';
+    }
+
+    let currentLang = normalizeLang(ls.get('dp_lang') || navigator.language);
+    document.documentElement.lang = currentLang;
+
+    function t(key, vars = {}) {
+      const getPath = (obj, path) => path.split('.').reduce((acc, k) => (acc && acc[k] !== undefined ? acc[k] : undefined), obj);
+      let text = getPath(I18N[currentLang], key);
+      if (text === undefined) text = getPath(I18N['zh-TW'], key);
+      if (typeof text !== 'string') return '';
+      return text.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : `{${k}}`));
+    }
+
+    // 替所有缺少種子的事件補上（含首次造訪與新增事件的情況）
+    function seedVotes() {
+      let changed = false;
+      events.forEach(e => {
+        if (voteCounts[e.id] === undefined) {
+          voteCounts[e.id] = Math.floor(Math.random() * 18) + 5;
+          changed = true;
+        }
+      });
+      if (changed) {
+        saveVoteCounts(voteCounts);
+        ls.set('dp_seeded', '1');
+      }
+    }
+
+    // 連線狀態 UI
+    function updateConnectionUI() {
+      const liveDot = document.getElementById('liveDot');
+      const connTag = document.getElementById('connTag');
+      const banner = document.getElementById('offlineBanner');
+      const bannerText = document.getElementById('offlineBannerText');
+
+      if (liveDot) liveDot.classList.add('offline');
+      if (connTag) { connTag.textContent = t('offlineTag'); connTag.className = 'conn-tag offline'; }
+      if (banner && bannerText) {
+        bannerText.textContent = t('offlineBanner');
+        banner.classList.add('visible');
+      }
     }
 
     /* ========== EVENT DATA ========== */
     const CATEGORY_MAP = {
-      sports: { label: '體育', color: '#00FF87', emoji: '⚡' },
-      tech: { label: '科技', color: '#0099FF', emoji: '💡' },
-      entertainment: { label: '娛樂', color: '#FF3366', emoji: '🎬' },
-      holiday: { label: '節日', color: '#B07CFF', emoji: '🎊' },
+      sports: { color: '#00FF87', emoji: '⚡' },
+      tech: { color: '#0099FF', emoji: '💡' },
+      entertainment: { color: '#FF3366', emoji: '🎬' },
+      holiday: { color: '#B07CFF', emoji: '🎊' },
     };
 
     const events = [
+      // ── SPORTS ──
       {
         id: 1,
         name: '2026 FIFA 世界盃',
@@ -1238,6 +1852,118 @@
         followers: 24300,
       },
       {
+        id: 4,
+        name: '2028 洛杉磯奧運',
+        subtitle: 'LA 2028 Summer Olympics',
+        date: '2028-07-14T00:00:00',
+        category: 'sports',
+        emoji: '🏅',
+        color: '#FFD700',
+        hype: 82,
+        followers: 12800,
+      },
+      {
+        id: 10,
+        name: '2026 MLB 世界大賽',
+        subtitle: '美國職棒最高殿堂 — 誰能封王？',
+        date: '2026-10-20T00:00:00',
+        category: 'sports',
+        emoji: '⚾',
+        color: '#E63946',
+        hype: 72,
+        followers: 8500,
+      },
+      {
+        id: 11,
+        name: '2026 NBA 總冠軍賽',
+        subtitle: '東西區頂尖對決 — 誰是最後贏家',
+        date: '2026-06-04T00:00:00',
+        category: 'sports',
+        emoji: '🏀',
+        color: '#F77F00',
+        hype: 85,
+        followers: 16200,
+      },
+      {
+        id: 12,
+        name: '2027 Super Bowl LXI',
+        subtitle: '全美最大體育盛典',
+        date: '2027-02-07T18:30:00',
+        category: 'sports',
+        emoji: '🏈',
+        color: '#1D3557',
+        hype: 89,
+        followers: 19800,
+      },
+      {
+        id: 13,
+        name: '2026 環法自行車賽',
+        subtitle: 'Tour de France — 三週極限挑戰',
+        date: '2026-07-04T00:00:00',
+        category: 'sports',
+        emoji: '🚴',
+        color: '#FCBF49',
+        hype: 68,
+        followers: 5400,
+      },
+      {
+        id: 14,
+        name: '2026 溫布頓網球錦標賽',
+        subtitle: '草地之王的殿堂 — Wimbledon',
+        date: '2026-06-29T00:00:00',
+        category: 'sports',
+        emoji: '🎾',
+        color: '#2A9D8F',
+        hype: 74,
+        followers: 7100,
+      },
+      {
+        id: 15,
+        name: '2026 F1 日本大獎賽',
+        subtitle: '鈴鹿賽道 — 速度與極限的代名詞',
+        date: '2026-10-11T00:00:00',
+        category: 'sports',
+        emoji: '🏎️',
+        color: '#E63946',
+        hype: 78,
+        followers: 9300,
+      },
+      {
+        id: 16,
+        name: '2027 WBC 世界棒球經典賽',
+        subtitle: '棒球界的世界盃 — 國家榮譽之戰',
+        date: '2027-03-11T00:00:00',
+        category: 'sports',
+        emoji: '🏆',
+        color: '#E76F51',
+        hype: 81,
+        followers: 11200,
+      },
+      {
+        id: 17,
+        name: '2028 歐洲國家盃',
+        subtitle: 'UEFA EURO 2028 — 英國・愛爾蘭聯合主辦',
+        date: '2028-06-09T00:00:00',
+        category: 'sports',
+        emoji: '⚽',
+        color: '#457B9D',
+        hype: 80,
+        followers: 10500,
+      },
+      {
+        id: 18,
+        name: '2026 世界盃決賽',
+        subtitle: 'MetLife Stadium — 巔峰之戰',
+        date: '2026-07-19T00:00:00',
+        category: 'sports',
+        emoji: '🏟️',
+        color: '#264653',
+        hype: 97,
+        followers: 38700,
+      },
+
+      // ── TECH ──
+      {
         id: 2,
         name: 'Apple 秋季發表會',
         subtitle: 'iPhone 18 系列・新一代 Apple Watch',
@@ -1248,6 +1974,129 @@
         hype: 88,
         followers: 18200,
       },
+      {
+        id: 7,
+        name: 'NASA Artemis III',
+        subtitle: '人類睽違半世紀重返月球',
+        date: '2026-11-01T00:00:00',
+        category: 'tech',
+        emoji: '🚀',
+        color: '#00D4FF',
+        hype: 87,
+        followers: 15600,
+      },
+      {
+        id: 19,
+        name: 'WWDC 2026',
+        subtitle: 'Apple 開發者大會 — iOS 20・macOS 17',
+        date: '2026-06-08T10:00:00',
+        category: 'tech',
+        emoji: '💻',
+        color: '#5E60CE',
+        hype: 83,
+        followers: 14100,
+      },
+      {
+        id: 20,
+        name: 'Google I/O 2026',
+        subtitle: 'Gemini 3.0・Android 17・Pixel 11',
+        date: '2026-05-13T10:00:00',
+        category: 'tech',
+        emoji: '🤖',
+        color: '#4285F4',
+        hype: 80,
+        followers: 12300,
+      },
+      {
+        id: 21,
+        name: 'SpaceX Starship 火星測試',
+        subtitle: '首次無人火星軌道任務',
+        date: '2027-09-01T00:00:00',
+        category: 'tech',
+        emoji: '🔴',
+        color: '#D62828',
+        hype: 92,
+        followers: 27400,
+      },
+      {
+        id: 22,
+        name: 'Windows 13 發布',
+        subtitle: 'Microsoft 新世代作業系統',
+        date: '2026-10-15T00:00:00',
+        category: 'tech',
+        emoji: '🪟',
+        color: '#00A4EF',
+        hype: 69,
+        followers: 6900,
+      },
+      {
+        id: 23,
+        name: 'Tesla Robotaxi 正式上線',
+        subtitle: '全自動駕駛計程車 — 開始載客',
+        date: '2026-08-01T00:00:00',
+        category: 'tech',
+        emoji: '🚕',
+        color: '#E63946',
+        hype: 86,
+        followers: 15800,
+      },
+      {
+        id: 24,
+        name: 'Meta Quest 4 發售',
+        subtitle: '下一代混合實境 — 更輕、更沉浸',
+        date: '2026-10-01T00:00:00',
+        category: 'tech',
+        emoji: '🥽',
+        color: '#0077B6',
+        hype: 73,
+        followers: 7800,
+      },
+      {
+        id: 25,
+        name: 'Samsung Galaxy S27 發表',
+        subtitle: 'Galaxy AI 3.0・新一代摺疊螢幕',
+        date: '2027-01-15T00:00:00',
+        category: 'tech',
+        emoji: '📱',
+        color: '#1A1A2E',
+        hype: 71,
+        followers: 6500,
+      },
+      {
+        id: 26,
+        name: 'CES 2027',
+        subtitle: '全球最大消費電子展 — 拉斯維加斯',
+        date: '2027-01-07T00:00:00',
+        category: 'tech',
+        emoji: '🔌',
+        color: '#00B4D8',
+        hype: 76,
+        followers: 9100,
+      },
+      {
+        id: 27,
+        name: 'OpenAI GPT-6 發布',
+        subtitle: '下一個智能里程碑',
+        date: '2026-11-20T00:00:00',
+        category: 'tech',
+        emoji: '🧠',
+        color: '#10A37F',
+        hype: 93,
+        followers: 32100,
+      },
+      {
+        id: 28,
+        name: 'Nintendo Switch 2 發售',
+        subtitle: '任天堂次世代主機 — 全新遊戲時代',
+        date: '2026-06-05T00:00:00',
+        category: 'tech',
+        emoji: '🎮',
+        color: '#E60012',
+        hype: 90,
+        followers: 22000,
+      },
+
+      // ── ENTERTAINMENT ──
       {
         id: 3,
         name: 'Avengers: Secret Wars',
@@ -1260,16 +2109,150 @@
         followers: 31500,
       },
       {
-        id: 4,
-        name: '2028 洛杉磯奧運',
-        subtitle: 'LA 2028 Summer Olympics',
-        date: '2028-07-14T00:00:00',
-        category: 'sports',
-        emoji: '🏅',
-        color: '#FFD700',
-        hype: 82,
-        followers: 12800,
+        id: 9,
+        name: 'GTA VI',
+        subtitle: 'Rockstar Games · Vice City 回歸',
+        date: '2026-10-27T00:00:00',
+        category: 'entertainment',
+        emoji: '🎮',
+        color: '#FF8800',
+        hype: 96,
+        followers: 42100,
       },
+      {
+        id: 29,
+        name: 'The Batman Part II',
+        subtitle: 'Matt Reeves 執導 — 哥譚再臨',
+        date: '2027-10-01T00:00:00',
+        category: 'entertainment',
+        emoji: '🦇',
+        color: '#1A1A2E',
+        hype: 84,
+        followers: 14500,
+      },
+      {
+        id: 30,
+        name: 'Avatar 3: Fire and Ash',
+        subtitle: 'James Cameron — 潘朵拉的火焰',
+        date: '2026-12-19T00:00:00',
+        category: 'entertainment',
+        emoji: '🌋',
+        color: '#00B4D8',
+        hype: 88,
+        followers: 19400,
+      },
+      {
+        id: 31,
+        name: 'Stranger Things 最終季',
+        subtitle: 'Netflix — 霍金斯的最後一戰',
+        date: '2026-07-04T00:00:00',
+        category: 'entertainment',
+        emoji: '🔦',
+        color: '#B5179E',
+        hype: 86,
+        followers: 17200,
+      },
+      {
+        id: 32,
+        name: 'Spider-Man 4',
+        subtitle: 'Tom Holland 回歸 — MCU 新篇章',
+        date: '2027-07-25T00:00:00',
+        category: 'entertainment',
+        emoji: '🕷️',
+        color: '#E63946',
+        hype: 89,
+        followers: 20800,
+      },
+      {
+        id: 33,
+        name: 'The Elder Scrolls VI',
+        subtitle: 'Bethesda — 十年磨一劍',
+        date: '2027-11-11T00:00:00',
+        category: 'entertainment',
+        emoji: '⚔️',
+        color: '#6D6875',
+        hype: 91,
+        followers: 25600,
+      },
+      {
+        id: 34,
+        name: 'Jurassic World 4',
+        subtitle: '恐龍系列重啟 — 全新故事',
+        date: '2026-07-02T00:00:00',
+        category: 'entertainment',
+        emoji: '🦕',
+        color: '#2A9D8F',
+        hype: 75,
+        followers: 8200,
+      },
+      {
+        id: 35,
+        name: 'Zelda 新作',
+        subtitle: 'Nintendo — 海拉魯的下一個冒險',
+        date: '2027-03-03T00:00:00',
+        category: 'entertainment',
+        emoji: '🗡️',
+        color: '#06D6A0',
+        hype: 88,
+        followers: 18900,
+      },
+      {
+        id: 36,
+        name: 'Dune: Part Three',
+        subtitle: 'Denis Villeneuve — 沙丘三部曲完結',
+        date: '2027-12-17T00:00:00',
+        category: 'entertainment',
+        emoji: '🏜️',
+        color: '#E9C46A',
+        hype: 85,
+        followers: 14800,
+      },
+      {
+        id: 37,
+        name: 'One Piece 完結篇',
+        subtitle: '尾田榮一郎 — 航向最終之島',
+        date: '2027-08-01T00:00:00',
+        category: 'entertainment',
+        emoji: '🏴‍☠️',
+        color: '#F4A261',
+        hype: 94,
+        followers: 35200,
+      },
+      {
+        id: 38,
+        name: 'Taylor Swift 世界巡迴',
+        subtitle: 'Eras Tour 延續 — 新專輯新舞台',
+        date: '2026-06-15T20:00:00',
+        category: 'entertainment',
+        emoji: '🎤',
+        color: '#FFB4A2',
+        hype: 90,
+        followers: 28700,
+      },
+      {
+        id: 39,
+        name: 'Minecraft 2',
+        subtitle: 'Mojang — 有一天會來的...對吧？',
+        date: '2027-05-17T00:00:00',
+        category: 'entertainment',
+        emoji: '⛏️',
+        color: '#588157',
+        hype: 78,
+        followers: 11200,
+      },
+      {
+        id: 40,
+        name: 'Star Wars: New Jedi Order',
+        subtitle: 'Daisy Ridley 回歸 — 絕地新紀元',
+        date: '2026-12-18T00:00:00',
+        category: 'entertainment',
+        emoji: '⭐',
+        color: '#FFD60A',
+        hype: 83,
+        followers: 13200,
+      },
+
+      // ── HOLIDAY ──
       {
         id: 5,
         name: '2027 跨年倒數',
@@ -1293,17 +2276,6 @@
         followers: 6700,
       },
       {
-        id: 7,
-        name: 'NASA Artemis III',
-        subtitle: '人類睽違半世紀重返月球',
-        date: '2026-11-01T00:00:00',
-        category: 'tech',
-        emoji: '🚀',
-        color: '#00D4FF',
-        hype: 87,
-        followers: 15600,
-      },
-      {
         id: 8,
         name: '端午節 2026',
         subtitle: '龍舟競渡・吃粽子・紀念屈原',
@@ -1315,15 +2287,114 @@
         followers: 4200,
       },
       {
-        id: 9,
-        name: 'GTA VI',
-        subtitle: 'Rockstar Games · Vice City 回歸',
-        date: '2026-10-27T00:00:00',
-        category: 'entertainment',
-        emoji: '🎮',
-        color: '#FF8800',
-        hype: 96,
-        followers: 42100,
+        id: 41,
+        name: '中秋節 2026',
+        subtitle: '月圓人團圓 — 烤肉吃月餅',
+        date: '2026-10-04T00:00:00',
+        category: 'holiday',
+        emoji: '🌕',
+        color: '#F4A261',
+        hype: 70,
+        followers: 5800,
+      },
+      {
+        id: 42,
+        name: '萬聖節 2026',
+        subtitle: 'Trick or Treat 🎃',
+        date: '2026-10-31T00:00:00',
+        category: 'holiday',
+        emoji: '🎃',
+        color: '#F77F00',
+        hype: 73,
+        followers: 7200,
+      },
+      {
+        id: 43,
+        name: '感恩節 2026',
+        subtitle: 'Thanksgiving — 火雞與家人的日子',
+        date: '2026-11-26T00:00:00',
+        category: 'holiday',
+        emoji: '🦃',
+        color: '#BC6C25',
+        hype: 67,
+        followers: 4900,
+      },
+      {
+        id: 44,
+        name: '情人節 2027',
+        subtitle: 'Valentine\'s Day 💕',
+        date: '2027-02-14T00:00:00',
+        category: 'holiday',
+        emoji: '💝',
+        color: '#FF006E',
+        hype: 72,
+        followers: 6300,
+      },
+      {
+        id: 45,
+        name: '農曆新年 2027',
+        subtitle: '丁未年 — 新春快樂！',
+        date: '2027-02-06T00:00:00',
+        category: 'holiday',
+        emoji: '🧧',
+        color: '#D62828',
+        hype: 85,
+        followers: 15400,
+      },
+      {
+        id: 46,
+        name: '地球日 2027',
+        subtitle: 'Earth Day — 為地球做一件事',
+        date: '2027-04-22T00:00:00',
+        category: 'holiday',
+        emoji: '🌍',
+        color: '#06D6A0',
+        hype: 61,
+        followers: 3200,
+      },
+      {
+        id: 47,
+        name: '母親節 2026',
+        subtitle: '別忘了跟媽媽說聲謝謝 ❤️',
+        date: '2026-05-10T00:00:00',
+        category: 'holiday',
+        emoji: '👩',
+        color: '#FFB4A2',
+        hype: 74,
+        followers: 7500,
+      },
+      {
+        id: 48,
+        name: '父親節 2026',
+        subtitle: '給爸爸一個擁抱',
+        date: '2026-08-08T00:00:00',
+        category: 'holiday',
+        emoji: '👨',
+        color: '#457B9D',
+        hype: 69,
+        followers: 5100,
+      },
+      {
+        id: 49,
+        name: '七夕情人節 2026',
+        subtitle: '農曆七月七 — 牛郎織女相會',
+        date: '2026-08-22T00:00:00',
+        category: 'holiday',
+        emoji: '🌌',
+        color: '#7B2D8E',
+        hype: 68,
+        followers: 4700,
+      },
+      {
+        id: 50,
+        name: '雙十一 2026',
+        subtitle: '全球最大購物節 — 荷包的末日',
+        date: '2026-11-11T00:00:00',
+        category: 'holiday',
+        emoji: '🛒',
+        color: '#EE4D2D',
+        hype: 77,
+        followers: 9600,
       },
     ];
 
@@ -1340,6 +2411,8 @@
       const total = Object.values(voteCounts).reduce((a, b) => a + b, 0);
       const el = document.getElementById('globalVoteCount');
       if (el) el.textContent = total.toLocaleString();
+      const labelEl = document.getElementById('globalVoteLabel');
+      if (labelEl) labelEl.textContent = t('globalVotes');
     }
 
     function updateAllVoteDisplays() {
@@ -1363,12 +2436,35 @@
       updateGlobalCounter();
     }
 
-    // Firebase 即時監聽
-    if (useFirebase && db) {
-      db.ref('votes').on('value', (snapshot) => {
-        voteCounts = snapshot.val() || {};
-        updateAllVoteDisplays();
-      });
+    function renderSuggestions() {
+      const grid = document.getElementById('suggestionsGrid');
+      if (!grid) return;
+
+      const list = [...suggestionCache]
+        .filter(s => !s.status || s.status === 'pending')
+        .sort((a, b) => (b.support || 0) - (a.support || 0) || (b.createdAt || 0) - (a.createdAt || 0))
+        .slice(0, 8);
+
+      if (!list.length) {
+        grid.innerHTML = `<div class="suggestion-empty">${t('suggestNoData')}</div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(item => {
+        const voted = !!mySuggestionVotes[item.id];
+        const dateText = item.targetDate ? formatDate(item.targetDate) : 'TBD';
+        return `
+          <article class="suggestion-card">
+            <div class="suggestion-name">${item.name}</div>
+            <div class="suggestion-meta">${CATEGORY_MAP[item.category || 'tech'].emoji} ${t('category.' + (item.category || 'tech'))} · ${dateText} · ${t('suggestPendingTag')}</div>
+            <div class="suggestion-note">${item.reason || ''}</div>
+            <div class="suggestion-actions">
+              <span class="suggestion-support">${t('suggestVotes', { count: item.support || 0 })}</span>
+              <button class="btn-support ${voted ? 'voted' : ''}" onclick="supportSuggestion('${item.id}', this)">${voted ? t('suggestSupported') : t('suggestSupport')}</button>
+            </div>
+          </article>
+        `;
+      }).join('');
     }
 
     /* ========== UTILITY ========== */
@@ -1396,7 +2492,63 @@
 
     function formatDate(dateStr) {
       const d = new Date(dateStr);
-      return `${d.getFullYear()} 年 ${d.getMonth() + 1} 月 ${d.getDate()} 日`;
+      return new Intl.DateTimeFormat(currentLang, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }).format(d);
+    }
+
+    function getGreetingText() {
+      const hour = new Date().getHours();
+      let bucket = 'night';
+      if (hour >= 5 && hour < 12) bucket = 'morning';
+      else if (hour >= 12 && hour < 18) bucket = 'noon';
+      else if (hour >= 18 && hour < 22) bucket = 'evening';
+
+      const pool = I18N[currentLang].greetings[bucket] || I18N['zh-TW'].greetings[bucket];
+      const index = Math.floor(Date.now() / 3600000) % pool.length;
+      return pool[index];
+    }
+
+    function renderStaticText() {
+      const el = (id) => document.getElementById(id);
+      if (el('navBrandSub')) el('navBrandSub').textContent = t('navSub');
+      if (el('globalVoteLabel')) el('globalVoteLabel').textContent = t('globalVotes');
+      if (el('exploreTitle')) el('exploreTitle').textContent = t('explore');
+      if (el('filterAll')) el('filterAll').textContent = t('filters.all');
+      if (el('filterSports')) el('filterSports').textContent = t('filters.sports');
+      if (el('filterTech')) el('filterTech').textContent = t('filters.tech');
+      if (el('filterEnt')) el('filterEnt').textContent = t('filters.entertainment');
+      if (el('filterHoliday')) el('filterHoliday').textContent = t('filters.holiday');
+      if (el('footerTagline')) el('footerTagline').textContent = t('footerTagline');
+      if (el('shortcutClose')) el('shortcutClose').textContent = t('shortcutClose');
+      if (el('shortcutTop')) el('shortcutTop').textContent = t('shortcutTop');
+      if (el('footerCopy')) el('footerCopy').textContent = t('footerCopy');
+      
+      const scrollIndicator = el('scrollIndicator');
+      if (scrollIndicator) {
+        let label = scrollIndicator.querySelector('.scroll-indicator-label');
+        if (label) label.textContent = t('scrollExplore');
+      }
+      
+      let langSel = el('langSelect');
+      if (langSel) langSel.value = currentLang;
+      
+      const connTag = el('connTag');
+      if (connTag) connTag.textContent = t('offlineTag');
+    }
+
+    function applyLanguage(lang) {
+      currentLang = normalizeLang(lang);
+      ls.set('dp_lang', currentLang);
+      document.documentElement.lang = currentLang;
+      renderStaticText();
+      renderHero();
+      const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+      renderGrid(activeFilter);
+      updateAllVoteDisplays();
+      updatePageTitle();
     }
 
     /* ========== HERO ========== */
@@ -1422,37 +2574,39 @@
           <div class="digit-group">
             ${days.split('').map(d => `<div class="digit-box hero-digit">${d}</div>`).join('')}
           </div>
-          <span class="unit-label">天</span>
+          <span class="unit-label">${t('unit.day')}</span>
         </div>
         <span class="countdown-colon">:</span>
         <div class="countdown-unit">
           <div class="digit-group">
             ${hrs.split('').map(d => `<div class="digit-box hero-digit">${d}</div>`).join('')}
           </div>
-          <span class="unit-label">時</span>
+          <span class="unit-label">${t('unit.hour')}</span>
         </div>
         <span class="countdown-colon">:</span>
         <div class="countdown-unit">
           <div class="digit-group">
             ${mins.split('').map(d => `<div class="digit-box hero-digit">${d}</div>`).join('')}
           </div>
-          <span class="unit-label">分</span>
+          <span class="unit-label">${t('unit.min')}</span>
         </div>
         <span class="countdown-colon">:</span>
         <div class="countdown-unit">
           <div class="digit-group">
             ${secs.split('').map(d => `<div class="digit-box hero-digit">${d}</div>`).join('')}
           </div>
-          <span class="unit-label">秒</span>
+          <span class="unit-label">${t('unit.sec')}</span>
         </div>
       `;
     }
 
     function renderHero() {
       const e = heroEvent;
+      document.getElementById('heroGreeting').textContent = getGreetingText();
+
       document.getElementById('heroEmoji').textContent = e.emoji;
       document.getElementById('heroGlow').style.background = e.color;
-      document.getElementById('heroTag').textContent = `${CATEGORY_MAP[e.category].emoji} ${CATEGORY_MAP[e.category].label}`;
+      document.getElementById('heroTag').textContent = `${CATEGORY_MAP[e.category].emoji} ${t('category.' + e.category)}`;
       document.getElementById('heroTag').style.color = e.color;
       document.getElementById('heroTitle').textContent = e.name;
       document.getElementById('heroSubtitle').textContent = e.subtitle;
@@ -1465,11 +2619,11 @@
       const votes = getVoteCount(e.id);
       const voted = hasVoted(e.id);
       document.getElementById('heroActions').innerHTML = `
-        <div class="hero-stat">🔥 <span class="fire-count">${votes}</span> 票</div>
-        <button class="btn-action btn-fire-hero ${voted ? 'voted' : ''}" onclick="voteHype(this, ${e.id})">${voted ? '🔥 已投票' : '🔥 投一票'}</button>
+        <div class="hero-stat">🔥 <span class="fire-count">${votes}</span> ${t('heroVotes')}</div>
+        <button class="btn-action btn-fire-hero ${voted ? 'voted' : ''}" onclick="voteHype(this, ${e.id})">${voted ? t('heroVotedBtn') : t('heroVoteBtn')}</button>
         <button class="btn-action btn-share" onclick="shareEvent(${e.id})">
-          分享
-          <span class="share-toast" id="toast-hero">已複製！</span>
+          ${t('share')}
+          <span class="share-toast" id="toast-hero">${t('copiedMini')}</span>
         </button>
       `;
     }
@@ -1496,10 +2650,10 @@
     function buildCardCountdown(event) {
       const cd = getCountdown(event.date);
       const units = [
-        { val: pad(cd.days > 99 ? cd.days : cd.days), label: '天', digits: String(cd.days).padStart(cd.days > 99 ? 3 : 2, '0') },
-        { val: pad(cd.hours), label: '時', digits: pad(cd.hours) },
-        { val: pad(cd.minutes), label: '分', digits: pad(cd.minutes) },
-        { val: pad(cd.seconds), label: '秒', digits: pad(cd.seconds) },
+        { val: pad(cd.days > 99 ? cd.days : cd.days), label: t('unit.day'), digits: String(cd.days).padStart(cd.days > 99 ? 3 : 2, '0') },
+        { val: pad(cd.hours), label: t('unit.hour'), digits: pad(cd.hours) },
+        { val: pad(cd.minutes), label: t('unit.min'), digits: pad(cd.minutes) },
+        { val: pad(cd.seconds), label: t('unit.sec'), digits: pad(cd.seconds) },
       ];
 
       return units.map(u => `
@@ -1512,38 +2666,69 @@
       `).join('');
     }
 
+    function getTimeProgress(dateStr) {
+      const eventTime = new Date(dateStr).getTime();
+      const now = Date.now();
+      const totalPeriod = 365 * 86400000;
+      const remaining = eventTime - now;
+      if (remaining <= 0) return 100;
+      if (remaining >= totalPeriod) return 0;
+      return Math.round(((totalPeriod - remaining) / totalPeriod) * 100);
+    }
+
+    function getUrgencyBadge(dateStr) {
+      const diff = new Date(dateStr).getTime() - Date.now();
+      if (diff <= 0) return '';
+      const days = diff / 86400000;
+      if (days <= 30) return `<span class="card-urgency-badge badge-imminent">${t('urgentNow')}</span>`;
+      if (days <= 90) return `<span class="card-urgency-badge badge-soon">${t('urgentSoon')}</span>`;
+      return '';
+    }
+
     function renderCard(event) {
       const cd = getCountdown(event.date);
       const expiredClass = cd.expired ? ' expired' : '';
+      const progress = getTimeProgress(event.date);
+      const urgency = getUrgencyBadge(event.date);
 
       return `
         <div class="event-card${expiredClass}" data-category="${event.category}" data-id="${event.id}" style="--card-color: ${event.color}" onclick="switchHero(${event.id})">
-          <span class="card-click-hint">點擊切換主畫面 ↑</span>
+          ${urgency}
+          <span class="card-click-hint">${t('cardSwitchHint')}</span>
           <div class="card-header">
             <div class="card-emoji-wrap">
               <div class="card-emoji">${event.emoji}</div>
               <div class="card-emoji-glow" style="background: ${event.color}"></div>
             </div>
-            <span class="card-category" data-cat="${event.category}">${CATEGORY_MAP[event.category].label}</span>
+            <span class="card-category" data-cat="${event.category}">${t('category.' + event.category)}</span>
           </div>
           <div class="card-name">${event.name}</div>
           <div class="card-subtitle">${event.subtitle}</div>
           <div class="card-date">📅 ${formatDate(event.date)}</div>
+          <div class="card-time-progress">
+            <div class="time-progress-header">
+              <span class="time-progress-label">${t('cardProgress')}</span>
+              <span class="time-progress-pct" style="color: ${event.color}">${progress}%</span>
+            </div>
+            <div class="time-progress-track">
+              <div class="time-progress-fill" style="width: ${progress}%; background: linear-gradient(90deg, ${event.color}44, ${event.color})"></div>
+            </div>
+          </div>
           <div class="card-countdown" id="card-cd-${event.id}">
             ${buildCardCountdown(event)}
           </div>
           <div class="card-hype">
-            <span class="hype-label">🔥 投票</span>
+            <span class="hype-label">${t('cardVotes')}</span>
             <div class="hype-bar-track">
               <div class="hype-bar-fill" style="width: ${getVoteBarWidth(event.id)}%; background: linear-gradient(90deg, ${event.color}88, ${event.color})"></div>
             </div>
-            <span class="hype-value" style="color: ${event.color}">${getVoteCount(event.id)} 票</span>
+            <span class="hype-value" style="color: ${event.color}">${getVoteCount(event.id)} ${t('heroVotes')}</span>
           </div>
           <div class="card-footer">
-            <div class="card-followers">🔥 <strong>${getVoteCount(event.id)}</strong> 人投票</div>
+            <div class="card-followers">${t('votedPeople', { count: getVoteCount(event.id) })}</div>
             <div class="card-actions">
-              <button class="card-btn card-btn-fire ${hasVoted(event.id) ? 'voted' : ''}" onclick="event.stopPropagation(); voteHype(this, ${event.id})">${hasVoted(event.id) ? '🔥 已投' : '🔥 +1'}</button>
-              <button class="card-btn" onclick="event.stopPropagation(); shareEvent(${event.id})">分享</button>
+              <button class="card-btn card-btn-fire ${hasVoted(event.id) ? 'voted' : ''}" onclick="event.stopPropagation(); voteHype(this, ${event.id})">${hasVoted(event.id) ? t('votedBtn') : t('voteBtn')}</button>
+              <button class="card-btn" onclick="event.stopPropagation(); shareEvent(${event.id})">${t('share')}</button>
             </div>
           </div>
         </div>
@@ -1556,6 +2741,17 @@
         .filter(e => filter === 'all' || e.category === filter)
         .filter(e => e.id !== heroEvent.id)
         .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      if (sorted.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">🔭</div>
+            <div class="empty-state-text">${t('emptyTitle')}</div>
+            <div class="empty-state-sub">${t('emptySub')}</div>
+          </div>
+        `;
+        return;
+      }
 
       grid.innerHTML = sorted.map(renderCard).join('');
 
@@ -1622,10 +2818,10 @@
       if (!event) return;
       const cd = getCountdown(event.date);
       const votes = getVoteCount(id);
-      const text = `距離 ${event.name} 還有 ${cd.days} 天！${event.emoji}\n🔥 ${votes} 人已投票\n\n🚀 來 T-Minus 一起倒數\nhttps://roywg925.github.io/deadline-planet/\n#TMinus`;
+      const text = t('shareText', { event: event.name, days: cd.days, emoji: event.emoji, votes });
 
       if (navigator.share) {
-        navigator.share({ title: `距離 ${event.name} 還有 ${cd.days} 天`, text, url: 'https://roywg925.github.io/deadline-planet/' }).catch(() => {});
+        navigator.share({ title: t('shareTitle', { event: event.name, days: cd.days }), text, url: 'https://roywg925.github.io/deadline-planet/' }).catch(() => {});
       } else if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => {
           showCopyToast();
@@ -1633,10 +2829,10 @@
       }
     }
 
-    function showCopyToast() {
+    function showCopyToast(message = t('copied')) {
       // Create a floating toast
       const toast = document.createElement('div');
-      toast.textContent = '✅ 已複製到剪貼簿';
+      toast.textContent = message;
       Object.assign(toast.style, {
         position: 'fixed',
         bottom: '32px',
@@ -1676,14 +2872,9 @@
       voteCounts[id] = (voteCounts[id] || 0) + 1;
       saveVoteCounts(voteCounts);
 
-      // Firebase 同步
-      if (useFirebase && db) {
-        db.ref('votes/' + id).transaction(current => (current || 0) + 1);
-      }
-
       // 視覺回饋
       btn.classList.add('voted');
-      btn.textContent = '🔥 已投';
+      btn.textContent = t('votedBtn');
 
       // 🔥 爆裂動畫
       const rect = btn.getBoundingClientRect();
@@ -1699,6 +2890,8 @@
       updateAllVoteDisplays();
     }
 
+
+
     /* ========== FILTERS ========== */
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1708,51 +2901,7 @@
       });
     });
 
-    /* ========== MODAL ========== */
-    const modal = document.getElementById('createModal');
-    document.getElementById('btnCreate').addEventListener('click', () => modal.classList.add('open'));
-    document.getElementById('btnCancel').addEventListener('click', () => modal.classList.remove('open'));
-    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
 
-    document.getElementById('btnSubmit').addEventListener('click', () => {
-      const name = document.getElementById('inputName').value.trim();
-      const date = document.getElementById('inputDate').value;
-      const category = document.getElementById('inputCategory').value;
-      const subtitle = document.getElementById('inputSubtitle').value.trim();
-
-      if (!name || !date) return;
-
-      const cat = CATEGORY_MAP[category];
-      const newEvent = {
-        id: Date.now(),
-        name,
-        subtitle: subtitle || name,
-        date: new Date(date).toISOString(),
-        category,
-        emoji: cat.emoji,
-        color: cat.color,
-        hype: 0,
-        followers: 0,
-      };
-
-      events.push(newEvent);
-
-      // 儲存到 localStorage
-      const userEvts = loadUserEvents();
-      userEvts.push(newEvent);
-      saveUserEvents(userEvts);
-
-      modal.classList.remove('open');
-
-      // Reset form
-      document.getElementById('inputName').value = '';
-      document.getElementById('inputDate').value = '';
-      document.getElementById('inputSubtitle').value = '';
-
-      // Re-render
-      const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-      renderGrid(activeFilter);
-    });
 
     /* ========== HERO MOUSE GLOW ========== */
     const heroSection = document.getElementById('hero');
@@ -1841,14 +2990,78 @@
       initStars();
     });
 
+    /* ========== PAGE TITLE COUNTDOWN ========== */
+    function updatePageTitle() {
+      const cd = getCountdown(heroEvent.date);
+      if (!cd.expired) {
+        document.title = t('titleFormat', {
+          d: cd.days,
+          h: pad(cd.hours),
+          m: pad(cd.minutes),
+          event: heroEvent.name,
+        });
+      }
+    }
+
+    /* ========== KEYBOARD SHORTCUTS ========== */
+    document.addEventListener('keydown', (e) => {
+      const tag = document.activeElement.tagName;
+      const isInput = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+      if ((e.key === 'Home' || (e.key === 't' && !isInput)) && !e.ctrlKey) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+
+    /* ========== SCROLL INDICATOR FADE ========== */
+    function handleScrollIndicator() {
+      const indicator = document.getElementById('scrollIndicator');
+      if (!indicator) return;
+      if (window.scrollY > 120) {
+        indicator.classList.add('faded');
+      } else {
+        indicator.classList.remove('faded');
+      }
+    }
+
+    /* ========== STICKY FILTER DETECTION ========== */
+    function handleStickyFilter() {
+      const filters = document.querySelector('.filters-section');
+      if (!filters) return;
+      const rect = filters.getBoundingClientRect();
+      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'));
+      if (rect.top <= navH + 2) {
+        filters.classList.add('stuck');
+      } else {
+        filters.classList.remove('stuck');
+      }
+    }
+
+    /* ========== PARALLAX NEBULA ========== */
+    function handleParallax() {
+      const nebula = document.querySelector('.nebula');
+      if (nebula) {
+        const y = window.scrollY * 0.12;
+        nebula.style.transform = `translateY(${y}px)`;
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      handleScrollIndicator();
+      handleStickyFilter();
+      handleParallax();
+    }, { passive: true });
+
+    document.getElementById('langSelect').addEventListener('change', (e) => {
+      applyLanguage(e.target.value);
+    });
+
     /* ========== INIT ========== */
-    // 載入使用者自建事件
-    loadUserEvents().forEach(e => events.push(e));
+    seedVotes();
+    renderStaticText();
 
     resizeCanvas();
     initStars();
-    renderHero();
-    renderGrid();
+    applyLanguage(currentLang);
     updateGlobalCounter();
     requestAnimationFrame(animate);
 
@@ -1856,6 +3069,7 @@
     setInterval(() => {
       updateHeroDigits();
       updateCardDigits();
+      updatePageTitle();
     }, 1000);
   </script>
 </body>
